@@ -30,6 +30,7 @@ public class Registrarse extends AppCompatActivity {
                 Intent intentjuego = new Intent(Registrarse.this, Juego.class);
                 intentjuego.putExtra("nombre",name); //Guardamos en variable global
                 startActivity(intentjuego);
+                finish();
             }
         });
     }

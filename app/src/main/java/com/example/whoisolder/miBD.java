@@ -13,12 +13,28 @@ public class miBD extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
-        //sqLiteDatabase.execSQL("CREATE TABLE Famosos('Codigo' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'Nombre' VARCHAR(30), 'Edad' INTEGER)");
+        /*sqLiteDatabase.execSQL("CREATE TABLE Famosos('Codigo' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'Nombre' VARCHAR(30), 'Edad' INTEGER)");*/
         //Rellenamos la bd
         /*sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Messi',35)");
         sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Cristiano',38)");
         sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Pen.Cruz',48)");
-        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Ant.Banderas',62)");*/
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Ant.Banderas',62)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Jen.Lopez',53)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Bel.Rueda',57)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Cr.Pedroche',34)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Pablo Motos',57)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Alej.Sanz',54)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Coronado',65)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Sanchez',51)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Rajoy',67)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Broncano',38)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Risto',48)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Bustamante',40)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Chenoa',47)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Beckham',47)");*/
+
+        //sqLiteDatabase.execSQL("CREATE TABLE Puntuaciones('Codigo' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'Nombre' VARCHAR(30), 'Puntos' INTEGER)");
+
     }
 
     @Override

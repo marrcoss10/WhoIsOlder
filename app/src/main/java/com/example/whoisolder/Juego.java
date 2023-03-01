@@ -2,6 +2,7 @@ package com.example.whoisolder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -82,15 +83,75 @@ public class Juego extends AppCompatActivity {
         }
         f1.setText(nombres.get(x));
         f2.setText(nombres.get(y));
+
         img1 = findViewById(R.id.img1);
         img2 = findViewById(R.id.img2);
-        img1.setImageResource(R.drawable.messi);
-        img2.setImageResource(R.drawable.cristiano);
 
+        actualizarImagen(img1,x);
+        actualizarImagen(img2,y);
+    }
+
+    public void actualizarImagen(ImageView img, int i){
+        String fam = nombres.get(i);
+        switch (fam){
+            case "Messi":
+                img.setImageResource(R.drawable.messi);
+                break;
+            case "Cristiano":
+                img.setImageResource(R.drawable.cristiano);
+                break;
+            case "Pen.Cruz":
+                img.setImageResource(R.drawable.penelope);
+                break;
+            case "Ant.Banderas":
+                img.setImageResource(R.drawable.antoniobanderas);
+                break;
+            case "Jen.Lopez":
+                img.setImageResource(R.drawable.jl);
+                break;
+            case "Bel.Rueda":
+                img.setImageResource(R.drawable.belenrueda);
+                break;
+            case "Cr.Pedroche":
+                img.setImageResource(R.drawable.pedroche);
+                break;
+            case "Pablo Motos":
+                img.setImageResource(R.drawable.motos);
+                break;
+            case "Alej.Sanz":
+                img.setImageResource(R.drawable.alesanz);
+                break;
+            case "Coronado":
+                img.setImageResource(R.drawable.coronado);
+                break;
+            case "Sanchez":
+                img.setImageResource(R.drawable.sanchez);
+                break;
+            case "Rajoy":
+                img.setImageResource(R.drawable.rajoy);
+                break;
+            case "Broncano":
+                img.setImageResource(R.drawable.broncano);
+                break;
+            case "Risto":
+                img.setImageResource(R.drawable.risto);
+                break;
+            case "Bustamante":
+                img.setImageResource(R.drawable.bustamante);
+                break;
+            case "Chenoa":
+                img.setImageResource(R.drawable.chenoa);
+                break;
+            case "Beckham":
+                img.setImageResource(R.drawable.beckham);
+                break;
+            default:
+                break;
+        }
     }
 
     public void cargarHashmap(){
-        miBD gestor = new miBD(this,"Famosos",null,1);
+        miBD gestor = new miBD(this,"Famosos",null,2);
         SQLiteDatabase bd = gestor.getReadableDatabase();
         Cursor c = bd.rawQuery("SELECT Nombre,Edad FROM Famosos",null);
         while(c.moveToNext()){
@@ -113,7 +174,20 @@ public class Juego extends AppCompatActivity {
             }
             else{
                 Intent intentpuntuaciones = new Intent(Juego.this, Puntuaciones.class);
+                TextView n = findViewById(R.id.hola);
+                String nom = n.getText().toString();
+
+                miBD gestor = new miBD(this,"Puntos",null,1);
+                SQLiteDatabase bd = gestor.getWritableDatabase();
+                //bd.execSQL("INSERT INTO Puntuaciones ('Nombre','Puntos') VALUES (nombre,puntos)");
+                ContentValues modificaciones = new ContentValues();
+                modificaciones.put("Nombre",nom);
+                modificaciones.put("Puntos",points);
+                bd.insert("Puntuaciones",null,modificaciones);
+                bd.close();
+
                 startActivity(intentpuntuaciones);
+                finish();
             }
         }
         else if(x1 <= x2){
@@ -125,7 +199,20 @@ public class Juego extends AppCompatActivity {
             }
             else{
                 Intent intentpuntuaciones = new Intent(Juego.this, Puntuaciones.class);
+                TextView n = findViewById(R.id.hola);
+                String nom = n.getText().toString();
+
+                miBD gestor = new miBD(this,"Puntos",null,1);
+                SQLiteDatabase bd = gestor.getWritableDatabase();
+                //bd.execSQL("INSERT INTO Puntuaciones ('Nombre','Puntos') VALUES (nombre,puntos)");
+                ContentValues modificaciones = new ContentValues();
+                modificaciones.put("Nombre",nom);
+                modificaciones.put("Puntos",points);
+                bd.insert("Puntuaciones",null,modificaciones);
+                bd.close();
+
                 startActivity(intentpuntuaciones);
+                finish();
             }
         }
     }
