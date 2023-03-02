@@ -11,12 +11,13 @@ import androidx.fragment.app.DialogFragment;
 public class DialogoInstrucciones extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
-
+        //Se genera el dialogo con las instrucciones del juego
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
         dialog.setMessage("El juego consisten en acertar qué personaje famoso es más mayor. Cada acierto suma un punto. Al fallar se finaliza la partida.");
         dialog.setCancelable(false);
         dialog.setTitle("Instrucciones");
         dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            //Se establece la funcion cuando pulse el boton del dialogo
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 dialog.cancel();

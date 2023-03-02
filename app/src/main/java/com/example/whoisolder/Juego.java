@@ -1,11 +1,23 @@
 package com.example.whoisolder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +34,11 @@ public class Juego extends AppCompatActivity {
     Integer y;
     int points;
     String p;
-    TextView pt, name;
+    TextView pt, name, f1, f2;
     ImageView img1, img2;
+    Boolean cargar = true;
+    NotificationManager elManager;
+    NotificationCompat.Builder builder;
 
 
     @Override
@@ -32,22 +47,62 @@ public class Juego extends AppCompatActivity {
         setContentView(R.layout.activity_juego);
         if (savedInstanceState!= null)
         {
+            //Recuperar valores cuando gira
             points = savedInstanceState.getInt("punt");
+            cargar = savedInstanceState.getBoolean("bool");
+            nombres = savedInstanceState.getStringArrayList("lista");
+            x = savedInstanceState.getInt("x");
+            y = savedInstanceState.getInt("y");
         }
 
+        //Realizar todo no necesario para las noticifaciones
+        elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        builder = new NotificationCompat.Builder(Juego.this,"Mi Notificacion");
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)!= PackageManager.PERMISSION_GRANTED) {
+                //PEDIR EL PERMISO
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 11);
+            }
+            NotificationChannel channel = new NotificationChannel("Mi Notificacion","Mi Notificacion", NotificationManager.IMPORTANCE_DEFAULT);
+            elManager.createNotificationChannel(channel);
+        }
+
+
+        builder.setContentTitle("Fin del juego");
+        builder.setContentText("Has perdido, vuelve a intentarlo!");
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.logoapppeque));
+        builder.setSmallIcon(android.R.drawable.stat_sys_warning);
+        builder.setAutoCancel(true);
+        //Recoger todos las variables del layout
         name = findViewById(R.id.hola);
         pt = findViewById(R.id.puntos);
         pt.setText(String.valueOf(points));
 
         p = String.valueOf(points);
         pt.setText(p);
+        //Se recogen las variables de la pantalla anterior
         Bundle bundle = getIntent().getExtras();
         String dato = bundle.getString("nombre");
         name.setText(dato);
-
+        //Se llama a la funcion de cargar los datos de la bd en el hashmap
         cargarHashmap();
-        cargarNombresAleatorios();
+        //Si es la primar vez se cargan los nombres aleatorios
+        if(cargar){
+            cargarNombresAleatorios();
+        }
+        //Si se ha girado se recogen los datos de las variables guardadas
+        else{
+            f1 = findViewById(R.id.famoso1);
+            f2 = findViewById(R.id.famoso2);
+            f1.setText(nombres.get(x));
+            f2.setText(nombres.get(y));
+            img1 = findViewById(R.id.img1);
+            img2 = findViewById(R.id.img2);
+            actualizarImagen(img1,x);
+            actualizarImagen(img2,y);
 
+        }
         Button boton1 = findViewById(R.id.btn_1);
         Button boton2 = findViewById(R.id.btn_2);
         boton1.setOnClickListener(new View.OnClickListener(){
@@ -67,8 +122,9 @@ public class Juego extends AppCompatActivity {
     }
 
     public void cargarNombresAleatorios(){
-        TextView f1 = findViewById(R.id.famoso1);
-        TextView f2 = findViewById(R.id.famoso2);
+        cargar = false;
+        f1 = findViewById(R.id.famoso1);
+        f2 = findViewById(R.id.famoso2);
         Integer i = nombres.size();
         x = (int) Math.floor(Math.random()*i);
         y = (int) Math.floor(Math.random()*i);
@@ -186,6 +242,8 @@ public class Juego extends AppCompatActivity {
                 bd.insert("Puntuaciones",null,modificaciones);
                 bd.close();
 
+                elManager.notify(1,builder.build());
+
                 startActivity(intentpuntuaciones);
                 finish();
             }
@@ -211,6 +269,8 @@ public class Juego extends AppCompatActivity {
                 bd.insert("Puntuaciones",null,modificaciones);
                 bd.close();
 
+                elManager.notify(1,builder.build());
+
                 startActivity(intentpuntuaciones);
                 finish();
             }
@@ -221,5 +281,9 @@ public class Juego extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt("punt", points);
+        savedInstanceState.putBoolean("bool",cargar);
+        savedInstanceState.putStringArrayList("lista",nombres);
+        savedInstanceState.putInt("x",x);
+        savedInstanceState.putInt("y",y);
     }
 }

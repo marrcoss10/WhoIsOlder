@@ -18,15 +18,16 @@ public class Registrarse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrarse);
-
+        //Recoger variables del layout
         Button comenzar = findViewById(R.id.btnStart);
 
         comenzar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Recoger variables del layout
                 EditText nombre = findViewById(R.id.editName);
                 String name = nombre.getText().toString();
-
+                //Crear el nuevo intent y pasarle el nombre a (Juego)
                 Intent intentjuego = new Intent(Registrarse.this, Juego.class);
                 intentjuego.putExtra("nombre",name); //Guardamos en variable global
                 startActivity(intentjuego);

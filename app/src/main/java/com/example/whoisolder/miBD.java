@@ -13,9 +13,12 @@ public class miBD extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
-        /*sqLiteDatabase.execSQL("CREATE TABLE Famosos('Codigo' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'Nombre' VARCHAR(30), 'Edad' INTEGER)");*/
-        //Rellenamos la bd
-        /*sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Messi',35)");
+        //Creamos la tabla de famosos
+        sqLiteDatabase.execSQL("CREATE TABLE Famosos('Codigo' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'Nombre' VARCHAR(30), 'Edad' INTEGER)");
+        //Borramos la bd de famosos
+        sqLiteDatabase.execSQL("DELETE FROM Puntuaciones");
+        //Rellenamos la bd de famosos
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Messi',35)");
         sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Cristiano',38)");
         sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Pen.Cruz',48)");
         sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Ant.Banderas',62)");
@@ -31,9 +34,9 @@ public class miBD extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Risto',48)");
         sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Bustamante',40)");
         sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Chenoa',47)");
-        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Beckham',47)");*/
-
-        //sqLiteDatabase.execSQL("CREATE TABLE Puntuaciones('Codigo' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'Nombre' VARCHAR(30), 'Puntos' INTEGER)");
+        sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Beckham',47)");
+        //Creamos la tabla de puntuaciones
+        sqLiteDatabase.execSQL("CREATE TABLE Puntuaciones('Codigo' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'Nombre' VARCHAR(30), 'Puntos' INTEGER)");
 
     }
 

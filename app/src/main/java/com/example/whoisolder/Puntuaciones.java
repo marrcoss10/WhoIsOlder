@@ -26,27 +26,29 @@ public class Puntuaciones extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puntuaciones);
-
+        //Se llama a la funcion de cargar las puntuaciones de la base de datos
         cargarPuntos();
-
+        //Se recogen las variables del layout
         list = findViewById(R.id.lista);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //Cuando pulse durante un tiempo un item, borra el item de la lista y de la base de datos
                 String borrar = listapuntos.get(i);
                 String nombre = borrar.split(" ")[0];
-                String puntos = borrar.split(" ")[0];
+                String puntos = borrar.split(" ")[1];
                 listapuntos.remove(i);
                 eliminarBD(nombre,puntos);
                 adaptador.notifyDataSetChanged();
-
+                return false;
             }
         });
-
+        //Se recogen las variables del layout
         Button share = findViewById(R.id.btn_share);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Se abre instagram en google para poder compartir la puntuacion
                 Uri web = Uri.parse("https://www.instagram.com/");
                 Intent webIntent = new Intent(Intent.ACTION_VIEW,web);
                 startActivity(webIntent);
@@ -54,8 +56,9 @@ public class Puntuaciones extends AppCompatActivity {
         });
     }
     public void cargarPuntos(){
+        //Se inicializa la lista de las puntuaciones
         listapuntos.clear();
-
+        //Se recogen todas las puntuaciones de la base de datoss
         miBD gestor = new miBD(this,"Puntos",null,1);
         SQLiteDatabase bd = gestor.getWritableDatabase();
         //bd.execSQL("DELETE FROM Puntuaciones"); /*Para borrar todos los datos*/
