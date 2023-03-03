@@ -22,20 +22,18 @@ public class MainActivity extends AppCompatActivity {
         //Recoger variables del layout
         Button jugar = findViewById(R.id.btn_jugar);
         Button instrucciones = findViewById(R.id.btn_instrucciones);
-
+        //Crear el intent (Registrarse)
         jugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Crear el intent (Registrarse)
                 Intent intentregistro = new Intent(MainActivity.this, Registrarse.class);
                 startActivity(intentregistro);
             }
         });
-
+        //Llama al dialogo de las intrucciones del juego
         instrucciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Llama al dialogo de las intrucciones del juego
                 DialogoInstrucciones dialogo = new DialogoInstrucciones();
                 dialogo.show(getSupportFragmentManager(),"instrucciones");
             }

@@ -30,10 +30,10 @@ public class Puntuaciones extends AppCompatActivity {
         cargarPuntos();
         //Se recogen las variables del layout
         list = findViewById(R.id.lista);
+        //Cuando pulse durante un tiempo un item, borra el item de la lista y de la base de datos
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Cuando pulse durante un tiempo un item, borra el item de la lista y de la base de datos
                 String borrar = listapuntos.get(i);
                 String nombre = borrar.split(" ")[0];
                 String puntos = borrar.split(" ")[1];
@@ -45,10 +45,10 @@ public class Puntuaciones extends AppCompatActivity {
         });
         //Se recogen las variables del layout
         Button share = findViewById(R.id.btn_share);
+        //Se abre instagram en google para poder compartir la puntuacion
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Se abre instagram en google para poder compartir la puntuacion
                 Uri web = Uri.parse("https://www.instagram.com/");
                 Intent webIntent = new Intent(Intent.ACTION_VIEW,web);
                 startActivity(webIntent);
@@ -72,7 +72,7 @@ public class Puntuaciones extends AppCompatActivity {
         list = findViewById(R.id.lista);
         list.setAdapter(adaptador);
     }
-
+    //Se elimina de la base de datos la fila con el nombre y puntos que ha dejado pulsado el usuario
     public void eliminarBD(String nombre, String puntos){
         miBD gestor = new miBD(this,"Puntos",null,1);
         SQLiteDatabase bd = gestor.getWritableDatabase();
