@@ -16,7 +16,7 @@ public class miBD extends SQLiteOpenHelper {
         //Creamos la tabla de famosos
         sqLiteDatabase.execSQL("CREATE TABLE Famosos('Codigo' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'Nombre' VARCHAR(30), 'Edad' INTEGER)");
         //Borramos la bd de famosos
-        sqLiteDatabase.execSQL("DELETE FROM Puntuaciones");
+        sqLiteDatabase.execSQL("DELETE FROM Famosos");
         //Rellenamos la bd de famosos
         sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Messi',35)");
         sqLiteDatabase.execSQL("INSERT INTO Famosos ('Nombre','Edad') VALUES ('Cristiano',38)");
