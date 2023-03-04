@@ -28,7 +28,7 @@ public class Registrarse extends AppCompatActivity {
                 String name = nombre.getText().toString();
 
                 Intent intentjuego = new Intent(Registrarse.this, Juego.class);
-                intentjuego.putExtra("nombre",name); //Guardamos en variable global
+                intentjuego.putExtra("nombre",name.replace(" ","")); //Guardamos en variable global y quitamos los epacios
                 startActivity(intentjuego);
                 finish();
             }
