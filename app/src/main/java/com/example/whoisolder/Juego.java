@@ -213,6 +213,7 @@ public class Juego extends AppCompatActivity {
     }
     //Se cargan todos los nombres junto a la edad de la BBDD en un hashmap para poder acceder mas rapido
     public void cargarHashmap(){
+        nombres.clear();
         miBD gestor = new miBD(this,"Famosos",null,2);
         SQLiteDatabase bd = gestor.getReadableDatabase();
         Cursor c = bd.rawQuery("SELECT Nombre,Edad FROM Famosos",null);
