@@ -59,7 +59,7 @@ public class Juego extends AppCompatActivity {
         elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         builder = new NotificationCompat.Builder(Juego.this,"Mi Notificacion");
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)!= PackageManager.PERMISSION_GRANTED) {
                 //PEDIR EL PERMISO
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 11);
