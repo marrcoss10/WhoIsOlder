@@ -19,7 +19,8 @@ import android.widget.ListView;
 public class Puntuaciones extends AppCompatActivity {
 
     ArrayList<String> listapuntos = new ArrayList<>();
-    ArrayAdapter adaptador;
+    int[] imagenes = {R.drawable.usuario};
+    AdaptadorListView adaptador;
     ListView list;
 
     @Override
@@ -68,7 +69,7 @@ public class Puntuaciones extends AppCompatActivity {
         }
         c.close();
         bd.close();
-        adaptador = new ArrayAdapter<String>(Puntuaciones.this, android.R.layout.simple_list_item_1, listapuntos);
+        adaptador = new AdaptadorListView(getApplicationContext(),listapuntos,imagenes);
         list = findViewById(R.id.lista);
         list.setAdapter(adaptador);
     }
